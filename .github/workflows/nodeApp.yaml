@@ -1,0 +1,30 @@
+name: Hello World app
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+    job1:
+        name: Checkout & test
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Test
+            run: |
+              cd capstone_project/hello-world
+              npm install
+              npm test
+    job2:
+      name: Build container
+      needs: [job1]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Build container
+          run: docker build -t nodeapp:latest capstone_project/hello-world/

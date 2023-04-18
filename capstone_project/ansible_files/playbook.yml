@@ -1,0 +1,22 @@
+- name: Update homepage
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ping Check using ping module
+      ping:
+    # - name: get directory
+    #   debug:
+    #    var: playbook_dir
+    # - name: get files
+    #   find:
+    #     paths: .
+    #     recurse: yes
+    - name: Update homepage
+      replace:
+        path: ~/../../usr/share/nginx/html/static/js/main.a2e45279.js.map
+        regexp: 'Hello World!'
+        replace: 'Hello DevOps!'
+      replace:
+        path: ~/../../usr/share/nginx/html/static/js/main.a2e45279.js
+        regexp: 'Hello World!'
+        replace: 'Hello DevOps!'

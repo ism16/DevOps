@@ -1,0 +1,16 @@
+version: "3.9"  
+services:
+  ansible:
+    build: 
+      context: ./ansible_base
+      dockerfile: Dockerfile
+    container_name: controller
+    volumes:
+      - type: bind
+        source: ./ansible_files
+        target: /home/ansible_controller/ansible_files
+  target1:
+    build: 
+      context: ./hello-world
+      dockerfile: Dockerfile
+    container_name: target1
